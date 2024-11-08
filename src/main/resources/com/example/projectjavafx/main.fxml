@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="983.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectjavafx.MainController">
+   <children>
+      <BorderPane prefHeight="617.0" prefWidth="968.0">
+         <left>
+            <AnchorPane prefHeight="483.0" prefWidth="191.0" style="-fx-background-color: linear-gradient(to right, #7ed2d2 0%, #147faf 50%,#0e6e82 100% );" stylesheets="@CSS/mainDesign.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="dashboard_btn" layoutX="37.0" layoutY="151.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="48.0" prefWidth="118.0" stylesheets="@CSS/mainDesign.css" text="DashBoard">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="menu_btn" layoutX="37.0" layoutY="220.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="48.0" prefWidth="118.0" stylesheets="@CSS/mainDesign.css" text="Menu">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="inventory_btn" layoutX="37.0" layoutY="284.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="48.0" prefWidth="118.0" stylesheets="@CSS/mainDesign.css" text="Kho">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="statistic_btn" layoutX="37.0" layoutY="350.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="48.0" prefWidth="118.0" stylesheets="@CSS/mainDesign.css" text="Thống kê">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                  </Button>
+                  <Button layoutX="37.0" layoutY="522.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="118.0" stylesheets="@CSS/mainDesign.css" text="Log Out">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="booking_table_btn" layoutX="37.0" layoutY="415.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="48.0" prefWidth="118.0" stylesheets="@CSS/mainDesign.css" text="Đặt bàn">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                  </Button>
+                  <Pane layoutX="-4.0" prefHeight="124.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="33.0" text="Chill Out" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="41.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children></AnchorPane>
+         </left>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane fx:id="dashboard_form" layoutX="27.0" layoutY="14.0" prefHeight="617.0" prefWidth="687.0" stylesheets="@CSS/mainDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Pane layoutX="67.0" layoutY="26.0" prefHeight="123.0" prefWidth="283.0" stylesheets="@CSS/mainDesign.css">
+                           <children>
+                              <Label fx:id="revenueToday" alignment="CENTER" layoutX="90.0" layoutY="53.0" prefHeight="47.0" prefWidth="95.0" text="Label" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold Italic" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="revenueToday1" alignment="CENTER" layoutX="10.0" layoutY="14.0" prefHeight="35.0" prefWidth="262.0" text="Doanh Thu Hôm Nay" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="radius" />
+                           </styleClass>
+                        </Pane>
+                        <Pane layoutX="432.0" layoutY="26.0" prefHeight="123.0" prefWidth="274.0" stylesheets="@CSS/mainDesign.css">
+                           <children>
+                              <Label fx:id="NumberOfCilent" alignment="CENTER" layoutX="87.0" layoutY="48.0" prefHeight="47.0" prefWidth="95.0" text="Label" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold Italic" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="revenueToday11" alignment="CENTER" layoutX="6.0" layoutY="14.0" prefHeight="35.0" prefWidth="262.0" text="Số Lượng Khách" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="radius" />
+                           </styleClass>
+                        </Pane>
+                        <Pane layoutX="67.0" layoutY="176.0" prefHeight="123.0" prefWidth="283.0" stylesheets="@CSS/mainDesign.css">
+                           <children>
+                              <Label fx:id="orderTotalToday" alignment="CENTER" layoutX="95.0" layoutY="50.0" prefHeight="47.0" prefWidth="95.0" text="Label" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold Italic" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="revenueToday12" alignment="CENTER" layoutX="12.0" layoutY="14.0" prefHeight="35.0" prefWidth="262.0" text="Tổng Số Order Hôm Nay" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="radius" />
+                           </styleClass>
+                        </Pane>
+                        <Pane layoutX="432.0" layoutY="176.0" prefHeight="123.0" prefWidth="277.0" stylesheets="@CSS/mainDesign.css">
+                           <children>
+                              <Label fx:id="numberOfOrderTotal" alignment="CENTER" layoutX="88.0" layoutY="47.0" prefHeight="47.0" prefWidth="95.0" text="Label" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold Italic" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="revenueToday13" alignment="CENTER" layoutX="6.0" layoutY="14.0" prefHeight="35.0" prefWidth="262.0" text="Số Sản Phẩm Order Hôm Nay" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="radius" />
+                           </styleClass>
+                        </Pane>
+                        <LineChart fx:id="revenue_chart" layoutX="25.0" layoutY="320.0" prefHeight="338.0" prefWidth="336.0" stylesheets="@CSS/mainDesign.css">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                           <styleClass>
+                              <String fx:value="white-bg" />
+                              <String fx:value="radius" />
+                           </styleClass>
+                        </LineChart>
+                        <BarChart fx:id="customer_chart" layoutX="409.0" layoutY="319.0" prefHeight="339.0" prefWidth="339.0" stylesheets="@CSS/mainDesign.css">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                           <styleClass>
+                              <String fx:value="white-bg" />
+                              <String fx:value="radius" />
+                           </styleClass>
+                        </BarChart>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="menu_form" layoutX="248.0" layoutY="115.0" prefHeight="683.0" prefWidth="792.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane layoutX="8.0" layoutY="78.0" prefHeight="606.0" prefWidth="488.0" stylesheets="@CSS/mainDesign.css">
+                           <styleClass>
+                              <String fx:value="white-bg" />
+                              <String fx:value="radius" />
+                           </styleClass>
+                           <children>
+                              <ScrollPane layoutX="7.0" layoutY="7.0" prefHeight="592.0" prefWidth="476.0">
+                                 <content>
+                                    <GridPane fx:id="menu_Grid">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                    </GridPane>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="511.0" layoutY="9.0" prefHeight="674.0" prefWidth="268.0" stylesheets="@CSS/mainDesign.css">
+                           <styleClass>
+                              <String fx:value="white-bg" />
+                              <String fx:value="radius" />
+                           </styleClass>
+                           <children>
+                              <TableView fx:id="menu_table" layoutX="9.0" layoutY="14.0" prefHeight="200.0" prefWidth="253.0">
+                                <columns>
+                                  <TableColumn fx:id="menu_col_pro" prefWidth="107.0" text="Tên sản phẩm" />
+                                  <TableColumn fx:id="menu_col_quantity" prefWidth="60.0" text="Số lượng" />
+                                    <TableColumn fx:id="menu_col_price" prefWidth="78.0" text="Giá" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                              <Button fx:id="payment" layoutX="30.0" layoutY="384.0" mnemonicParsing="false" onAction="#checkPaymentClick" prefHeight="43.0" prefWidth="221.0" stylesheets="@CSS/mainDesign.css" text="Thanh Toán">
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="transparent" />
+                                    <String fx:value="radius" />
+                                 </styleClass>
+                              </Button>
+                              <Button fx:id="menu_receipt" layoutX="153.0" layoutY="451.0" mnemonicParsing="false" onAction="#printInvoice" prefHeight="43.0" prefWidth="98.0" stylesheets="@CSS/mainDesign.css" text="Hoá Đơn">
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="transparent" />
+                                    <String fx:value="radius" />
+                                 </styleClass>
+                              </Button>
+                              <Button fx:id="menu_delete" layoutX="30.0" layoutY="451.0" mnemonicParsing="false" onAction="#menuDelete" prefHeight="43.0" prefWidth="98.0" stylesheets="@CSS/mainDesign.css" text="Xoá">
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="transparent" />
+                                    <String fx:value="radius" />
+                                 </styleClass>
+                              </Button>
+                              <Label layoutX="37.0" layoutY="235.0" prefHeight="38.0" prefWidth="72.0" text="Tổng Tiền">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="37.0" layoutY="282.0" prefHeight="38.0" prefWidth="72.0" text="Tiền Nhận">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="37.0" layoutY="329.0" prefHeight="38.0" prefWidth="72.0" text="Tiền Thối">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="menu_total" layoutX="110.0" layoutY="239.0" prefHeight="26.0" prefWidth="86.0" text="0.0">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="change" layoutX="110.0" layoutY="335.0" prefHeight="26.0" prefWidth="86.0" text="0.0">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="menu_receive" layoutX="109.0" layoutY="289.0" onInputMethodTextChanged="#menuDisplayChange" onKeyPressed="#menuDisplayChange" prefHeight="25.0" prefWidth="100.0" />
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="22.0" layoutY="24.0" text="Tìm Kiếm">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="searching" layoutX="125.0" layoutY="27.0" onAction="#search" prefHeight="25.0" prefWidth="260.0" promptText="Nhập sản phẩm" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="inventory_form" layoutX="209.0" layoutY="189.0" prefHeight="710.0" prefWidth="792.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <SplitPane dividerPositions="0.5" layoutX="10.0" layoutY="9.0" orientation="VERTICAL" prefHeight="695.0" prefWidth="771.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <TableView fx:id="table_view" onMouseClicked="#selectDataTableView" prefHeight="337.0" prefWidth="768.0" stylesheets="@CSS/mainDesign.css">
+                                      <columns>
+                                        <TableColumn fx:id="table_col_id" prefWidth="75.0" text="ID" />
+                                        <TableColumn fx:id="table_col_name" prefWidth="166.0" text="Tên sản phẩm" />
+                                          <TableColumn fx:id="table_col_type" prefWidth="83.0" text="Loại" />
+                                          <TableColumn fx:id="table_col_stock" prefWidth="122.0" text="Kho" />
+                                          <TableColumn fx:id="table_col_price" prefWidth="151.0" text="Giá" />
+                                          <TableColumn fx:id="table_col_photo" prefWidth="169.0" text="Ảnh" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <Label layoutX="317.0" layoutY="56.0" prefHeight="28.0" prefWidth="67.0" text="Số Lượng" />
+                                    <Label layoutX="55.0" layoutY="56.0" prefHeight="28.0" prefWidth="67.0" text="Mã ID" />
+                                    <Label layoutX="55.0" layoutY="110.0" prefHeight="28.0" prefWidth="88.0" text="Tên Sản Phẩm" />
+                                    <Label layoutX="55.0" layoutY="172.0" prefHeight="28.0" prefWidth="67.0" text="Loại" />
+                                    <Label layoutX="317.0" layoutY="110.0" prefHeight="28.0" prefWidth="67.0" text="Giá" />
+                                    <TextField fx:id="idProduct" disable="true" layoutX="143.0" layoutY="58.0" prefHeight="25.0" prefWidth="127.0" />
+                                    <TextField fx:id="productName" layoutX="143.0" layoutY="112.0" prefHeight="25.0" prefWidth="128.0" />
+                                    <TextField fx:id="quantity" layoutX="384.0" layoutY="58.0" prefHeight="25.0" prefWidth="130.0" />
+                                    <TextField fx:id="price" layoutX="384.0" layoutY="113.0" prefHeight="25.0" prefWidth="131.0" />
+                                    <ComboBox fx:id="type" layoutX="143.0" layoutY="174.0" prefHeight="25.0" prefWidth="129.0" />
+                                    <AnchorPane layoutX="571.0" layoutY="25.0" prefHeight="150.0" prefWidth="148.0" stylesheets="@CSS/mainDesign.css">
+                                       <children>
+                                          <ImageView fx:id="img" fitHeight="150.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow" />
+                                       </children>
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="white-bg" />
+                                       </styleClass>
+                                    </AnchorPane>
+                                    <Button fx:id="addButton" layoutX="88.0" layoutY="255.0" mnemonicParsing="false" onAction="#add_btn" prefHeight="43.0" prefWidth="110.0" stylesheets="@CSS/mainDesign.css" text="Thêm">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="radius" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button fx:id="updateButton" layoutX="245.0" layoutY="255.0" mnemonicParsing="false" onAction="#update_btn" prefHeight="43.0" prefWidth="110.0" stylesheets="@CSS/mainDesign.css" text="Cập nhật">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="radius" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button fx:id="deleteButton" layoutX="409.0" layoutY="255.0" mnemonicParsing="false" onAction="#delete_btn" prefHeight="43.0" prefWidth="110.0" stylesheets="@CSS/mainDesign.css" text="Xoá">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="radius" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="596.0" layoutY="193.0" mnemonicParsing="false" onAction="#import_btn" prefHeight="24.0" prefWidth="110.0" text="Import" />
+                                    <Button layoutX="561.0" layoutY="255.0" mnemonicParsing="false" onAction="#inventory_clear" prefHeight="43.0" prefWidth="110.0" stylesheets="@CSS/mainDesign.css" text="Clear">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="radius" />
+                                       </styleClass>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children></AnchorPane>
+                  <AnchorPane fx:id="statistic_form" layoutX="131.0" layoutY="107.0" prefHeight="710.0" prefWidth="792.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <SplitPane dividerPositions="0.5057142857142857" layoutX="6.0" layoutY="3.0" orientation="VERTICAL" prefHeight="702.0" prefWidth="782.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <TableView fx:id="statistic_table" layoutX="108.0" layoutY="73.0" prefHeight="346.0" prefWidth="777.0" stylesheets="@CSS/mainDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn fx:id="name_col" prefWidth="186.0" text="Tên Sản Phẩm" />
+                                        <TableColumn fx:id="type_col" prefWidth="124.0" text="Loại" />
+                                          <TableColumn fx:id="totalOrder_col" prefWidth="156.0" text="Tổng Số Đơn" />
+                                          <TableColumn fx:id="totalRevenue_col" prefWidth="135.0" text="Tổng Doanh Thu" />
+                                          <TableColumn fx:id="date_col" minWidth="3.0" prefWidth="175.0" text="Ngày" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <Label fx:id="dayLabel" layoutX="79.0" layoutY="39.0" prefHeight="30.0" prefWidth="111.0" text="Chọn ngày" visible="false">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="76.0" layoutY="84.0" prefHeight="30.0" prefWidth="138.0" text="Tên sản phẩm">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker fx:id="datePicker" layoutX="207.0" layoutY="42.0" prefHeight="25.0" prefWidth="157.0" promptText="dd/mm/yyyy" visible="false" />
+                                    <TextField fx:id="nameProduct" layoutX="207.0" layoutY="87.0" prefHeight="25.0" prefWidth="156.0" />
+                                    <PieChart fx:id="statistic_chart" layoutX="402.0" layoutY="20.0" prefHeight="305.0" prefWidth="352.0" styleClass="white-bg" stylesheets="@CSS/mainDesign.css" title="Tỉ lệ (%) 2 loại sản phẩm" />
+                                    <Button layoutX="158.0" layoutY="229.0" mnemonicParsing="false" onAction="#showStatisticsData" prefHeight="49.0" prefWidth="98.0" stylesheets="@CSS/mainDesign.css" text="Lọc">
+                                       <styleClass>
+                                          <String fx:value="btn" />
+                                          <String fx:value="radius" />
+                                       </styleClass>
+                                    </Button>
+                                    <Label fx:id="monthLabel" layoutX="78.0" layoutY="41.0" text="Nhập tháng" visible="false">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="monthField" layoutX="209.0" layoutY="46.0" prefHeight="25.0" prefWidth="43.0" visible="false" />
+                                    <Pane fx:id="monthsPane" layoutX="78.0" layoutY="23.0" prefHeight="63.0" prefWidth="288.0" visible="false">
+                                       <children>
+                                          <Label fx:id="from" layoutY="17.0" prefHeight="17.0" prefWidth="34.0" text="Từ ">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="to" layoutX="128.0" layoutY="17.0" prefHeight="17.0" prefWidth="34.0" text="đến">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="fromMonth" layoutX="56.0" layoutY="20.0" prefHeight="25.0" prefWidth="44.0" />
+                                          <TextField fx:id="toMonth" layoutX="187.0" layoutY="19.0" prefHeight="25.0" prefWidth="44.0" />
+                                       </children>
+                                    </Pane>
+                                    <RadioButton fx:id="day" layoutX="88.0" layoutY="158.0" mnemonicParsing="false" onAction="#showChoices" text="Ngày" />
+                                    <RadioButton fx:id="month" layoutX="173.0" layoutY="158.0" mnemonicParsing="false" onAction="#showChoices" text="Tháng" />
+                                    <RadioButton fx:id="months" layoutX="267.0" layoutY="158.0" mnemonicParsing="false" onAction="#showChoices" text="Nhiều tháng" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="booking_table_form" layoutX="154.0" layoutY="155.0" prefHeight="710.0" prefWidth="792.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ScrollPane prefHeight="710.0" prefWidth="792.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <GridPane fx:id="table_grid">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                              </GridPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>
