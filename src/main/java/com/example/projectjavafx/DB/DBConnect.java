@@ -197,12 +197,11 @@ public class DBConnect {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
         String date = dateTimeFormatter.format(now);
-        String sqlOrder = "INSERT INTO `Order` (userID, OrderDate) VALUES (?, ?)";
+        String sqlOrder = "INSERT INTO `Order` (OrderDate) VALUES (?)";
 
         PreparedStatement preparedStatement;
         preparedStatement = connection.prepareStatement(sqlOrder, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setInt(1, data.id);
-        preparedStatement.setString(2, date);
+        preparedStatement.setString(1, date);
 
         row = preparedStatement.executeUpdate();
 

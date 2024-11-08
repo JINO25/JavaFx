@@ -289,7 +289,15 @@ public class MainController implements Initializable {
 
     }
 
-
+    public void logOut(ActionEvent event) throws IOException {
+        data.id=0;
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("login_form.fxml"));
+        Scene scene = new Scene(fxmlLoader);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
 
 //    DashBoard-------------------------------
         public void showDashBoard() throws SQLException {
@@ -676,6 +684,7 @@ public class MainController implements Initializable {
                 menu_receive.setText("");
                 menu_total.setText("0.0");
                 change.setText("0.0");
+                menu_receipt.setDisable(false);
             }
         }
     }
@@ -684,7 +693,7 @@ public class MainController implements Initializable {
         Stage stage = new Stage();
         PDFExporter pdfExporter = new PDFExporter();
         pdfExporter.exportPDF(stage);
-
+        menu_receipt.setDisable(true);
     }
 
 
