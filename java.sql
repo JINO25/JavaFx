@@ -23,17 +23,17 @@ DROP TABLE IF EXISTS `bill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bill` (
-  `billID` int NOT NULL AUTO_INCREMENT,
-  `total` int DEFAULT NULL,
-  `orderID` int DEFAULT NULL,
-  `billDate` date DEFAULT NULL,
-  `userID` int DEFAULT NULL,
-  PRIMARY KEY (`billID`),
-  KEY `orderID` (`orderID`),
-  KEY `userID` (`userID`),
-  CONSTRAINT `bill_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `order_detail` (`orderID`),
-  CONSTRAINT `bill_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                        `billID` int NOT NULL AUTO_INCREMENT,
+                        `total` int DEFAULT NULL,
+                        `orderID` int DEFAULT NULL,
+                        `billDate` date DEFAULT NULL,
+                        `userID` int DEFAULT NULL,
+                        PRIMARY KEY (`billID`),
+                        KEY `orderID` (`orderID`),
+                        KEY `userID` (`userID`),
+                        CONSTRAINT `bill_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `order_detail` (`orderID`),
+                        CONSTRAINT `bill_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `bill` (
 
 LOCK TABLES `bill` WRITE;
 /*!40000 ALTER TABLE `bill` DISABLE KEYS */;
-INSERT INTO `bill` VALUES (1,34000,1,'2024-11-02',1),(2,45000,2,'2024-11-02',1),(3,40000,3,'2024-11-01',1),(4,29000,4,'2024-11-03',1),(5,15000,5,'2024-11-03',1),(6,54000,6,'2024-11-03',1),(7,44000,7,'2024-11-03',1),(8,166000,8,'2024-11-05',1),(9,67000,14,'2024-11-06',1),(10,40000,15,'2024-11-06',1),(11,5000,18,'2024-11-06',1),(12,64000,19,'2024-11-07',1),(13,95000,20,'2024-11-07',1),(14,40000,21,'2024-11-08',1),(15,40000,22,'2024-11-08',1),(16,20000,23,'2024-11-08',2),(17,40000,24,'2024-11-08',2),(18,35000,25,'2024-11-08',2),(19,100000,26,'2024-11-08',2),(20,30000,27,'2024-11-08',1);
+INSERT INTO `bill` VALUES (1,34000,1,'2024-11-02',1),(2,45000,2,'2024-11-02',1),(3,40000,3,'2024-11-01',1),(4,29000,4,'2024-11-03',1),(5,15000,5,'2024-11-03',1),(6,54000,6,'2024-11-03',1),(7,44000,7,'2024-11-03',1),(8,166000,8,'2024-11-05',1),(9,67000,14,'2024-11-06',1),(10,40000,15,'2024-11-06',1),(11,5000,18,'2024-11-06',1),(12,64000,19,'2024-11-07',1),(13,95000,20,'2024-11-07',1),(14,40000,21,'2024-11-08',1),(15,40000,22,'2024-11-08',1),(16,20000,23,'2024-11-08',2),(17,40000,24,'2024-11-08',2),(18,35000,25,'2024-11-08',2),(19,100000,26,'2024-11-08',2),(20,30000,27,'2024-11-08',1),(21,105000,28,'2024-11-09',1),(22,20000,29,'2024-11-09',1),(23,40000,30,'2024-11-09',1);
 /*!40000 ALTER TABLE `bill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,10 +54,10 @@ DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order` (
-  `OrderID` int NOT NULL AUTO_INCREMENT,
-  `OrderDate` date DEFAULT NULL,
-  PRIMARY KEY (`OrderID`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                         `OrderID` int NOT NULL AUTO_INCREMENT,
+                         `OrderDate` date DEFAULT NULL,
+                         PRIMARY KEY (`OrderID`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (1,'2024-11-02'),(2,'2024-11-02'),(3,'2024-11-01'),(4,'2024-11-03'),(5,'2024-11-03'),(6,'2024-11-03'),(7,'2024-11-03'),(8,'2024-11-05'),(14,'2024-11-06'),(15,'2024-11-06'),(18,'2024-11-06'),(19,'2024-11-07'),(20,'2024-11-07'),(21,'2024-11-08'),(22,'2024-11-08'),(23,'2024-11-08'),(24,'2024-11-08'),(25,'2024-11-08'),(26,'2024-11-08'),(27,'2024-11-08');
+INSERT INTO `order` VALUES (1,'2024-11-02'),(2,'2024-11-02'),(3,'2024-11-01'),(4,'2024-11-03'),(5,'2024-11-03'),(6,'2024-11-03'),(7,'2024-11-03'),(8,'2024-11-05'),(14,'2024-11-06'),(15,'2024-11-06'),(18,'2024-11-06'),(19,'2024-11-07'),(20,'2024-11-07'),(21,'2024-11-08'),(22,'2024-11-08'),(23,'2024-11-08'),(24,'2024-11-08'),(25,'2024-11-08'),(26,'2024-11-08'),(27,'2024-11-08'),(28,'2024-11-09'),(29,'2024-11-09'),(30,'2024-11-09');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,16 +78,16 @@ DROP TABLE IF EXISTS `order_detail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order_detail` (
-  `orderDetailID` int NOT NULL AUTO_INCREMENT,
-  `orderID` int DEFAULT NULL,
-  `productID` int DEFAULT NULL,
-  `quantity` int DEFAULT NULL,
-  PRIMARY KEY (`orderDetailID`),
-  KEY `orderID` (`orderID`),
-  KEY `productID` (`productID`),
-  CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `order` (`OrderID`),
-  CONSTRAINT `order_detail_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                                `orderDetailID` int NOT NULL AUTO_INCREMENT,
+                                `orderID` int DEFAULT NULL,
+                                `productID` int DEFAULT NULL,
+                                `quantity` int DEFAULT NULL,
+                                PRIMARY KEY (`orderDetailID`),
+                                KEY `orderID` (`orderID`),
+                                KEY `productID` (`productID`),
+                                CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `order` (`OrderID`),
+                                CONSTRAINT `order_detail_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`)
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
-INSERT INTO `order_detail` VALUES (1,1,4,2),(2,1,5,2),(3,2,1,2),(4,2,4,3),(5,3,2,20),(6,4,2,1),(7,4,3,1),(8,4,6,2),(9,5,4,3),(11,6,2,1),(12,6,5,2),(13,6,4,2),(16,7,2,2),(17,7,6,2),(18,8,1,2),(19,8,5,3),(20,8,2,4),(21,8,4,2),(22,8,8,2),(32,14,3,3),(33,14,4,1),(34,14,2,1),(35,14,5,1),(36,14,1,1),(38,15,9,2),(41,18,8,1),(42,19,5,2),(44,19,2,1),(45,19,1,1),(46,19,4,1),(47,20,1,1),(49,20,9,1),(50,20,2,1),(51,20,9,1),(52,20,9,1),(53,21,1,2),(54,21,4,2),(55,22,9,2),(56,23,9,1),(57,24,2,2),(58,25,2,1),(59,25,1,1),(60,26,2,2),(61,26,9,2),(63,26,9,1),(64,27,1,2);
+INSERT INTO `order_detail` VALUES (1,1,4,2),(2,1,5,2),(3,2,1,2),(4,2,4,3),(5,3,2,20),(6,4,2,1),(7,4,3,1),(8,4,6,2),(9,5,4,3),(11,6,2,1),(12,6,5,2),(13,6,4,2),(16,7,2,2),(17,7,6,2),(18,8,1,2),(19,8,5,3),(20,8,2,4),(21,8,4,2),(22,8,8,2),(32,14,3,3),(33,14,4,1),(34,14,2,1),(35,14,5,1),(36,14,1,1),(38,15,9,2),(41,18,8,1),(42,19,5,2),(44,19,2,1),(45,19,1,1),(46,19,4,1),(47,20,1,1),(49,20,9,1),(50,20,2,1),(51,20,9,1),(52,20,9,1),(53,21,1,2),(54,21,4,2),(55,22,9,2),(56,23,9,1),(57,24,2,2),(58,25,2,1),(59,25,1,1),(60,26,2,2),(61,26,9,2),(63,26,9,1),(64,27,1,2),(65,28,1,3),(66,28,9,3),(67,29,10,2),(68,30,2,2);
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,16 +108,16 @@ DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
-  `productID` int NOT NULL AUTO_INCREMENT,
-  `productName` varchar(50) DEFAULT NULL,
-  `stock` int DEFAULT NULL,
-  `price` int DEFAULT NULL,
-  `photo` varchar(50) DEFAULT NULL,
-  `typeID` int DEFAULT NULL,
-  PRIMARY KEY (`productID`),
-  KEY `typeID` (`typeID`),
-  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`typeID`) REFERENCES `type_product` (`typeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                           `productID` int NOT NULL AUTO_INCREMENT,
+                           `productName` varchar(50) DEFAULT NULL,
+                           `price` int DEFAULT NULL,
+                           `photo` varchar(50) DEFAULT NULL,
+                           `typeID` int DEFAULT NULL,
+                           `status` varchar(20) DEFAULT 'Có',
+                           PRIMARY KEY (`productID`),
+                           KEY `typeID` (`typeID`),
+                           CONSTRAINT `product_ibfk_1` FOREIGN KEY (`typeID`) REFERENCES `type_product` (`typeID`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +126,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'Burger',4,15000,'burger.jpg',1),(2,'Pizza',4,20000,'pizza.jpg',1),(3,'Coke',91,5000,'coke.jpg',2),(4,'Pepsi',42,5000,'pepsi.jpg',2),(5,'Salad',16,12000,'salad.jpg',1),(6,'Water',181,2000,'water.jpg',2),(8,'Coca',47,5000,'vn.png',2),(9,'Matcha',84,20000,'matcha.jpg',2);
+INSERT INTO `product` VALUES (1,'Burger',15000,'burger.jpg',2,'Có'),(2,'Pizza',20000,'pizza.jpg',1,'Có'),(3,'Coke',5000,'default.jpg',2,'Xoá'),(4,'Pepsi',5000,'pepsi.jpg',1,'Có'),(5,'Salad',12000,'salad.jpg',1,'Có'),(6,'Water',2000,'water.jpg',2,'Có'),(8,'Coca',5000,'coca.jpg',2,'Có'),(9,'Matcha',20000,'matcha.jpg',2,'Có'),(10,'Cafe Đá',10000,'cafe.jpg',2,'Có'),(12,'Cafe sữa',14000,'milk-cafe.jpg',2,'Có');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,10 +138,10 @@ DROP TABLE IF EXISTS `table`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `table` (
-  `tableID` int NOT NULL AUTO_INCREMENT,
-  `stt` int DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`tableID`)
+                         `tableID` int NOT NULL AUTO_INCREMENT,
+                         `stt` int DEFAULT NULL,
+                         `status` tinyint(1) DEFAULT NULL,
+                         PRIMARY KEY (`tableID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -163,9 +163,9 @@ DROP TABLE IF EXISTS `type_product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `type_product` (
-  `typeID` int NOT NULL AUTO_INCREMENT,
-  `typeName` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`typeID`)
+                                `typeID` int NOT NULL AUTO_INCREMENT,
+                                `typeName` varchar(50) DEFAULT NULL,
+                                PRIMARY KEY (`typeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -187,11 +187,11 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(25) NOT NULL,
-  `pwd` varchar(25) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
+                        `id` int NOT NULL AUTO_INCREMENT,
+                        `email` varchar(25) NOT NULL,
+                        `pwd` varchar(25) NOT NULL,
+                        `name` varchar(20) NOT NULL,
+                        PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -214,4 +214,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-08 15:47:52
+-- Dump completed on 2024-11-09 20:28:29
