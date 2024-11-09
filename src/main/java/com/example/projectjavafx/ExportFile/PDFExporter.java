@@ -60,7 +60,7 @@ public class PDFExporter {
                 document.add(title);
 
 
-                Paragraph employeeAndDate = new Paragraph("Nhân viên: " + data.userName + "\t\t" + date)
+                Paragraph employeeAndDate = new Paragraph("Nhân viên: " + data.userName + "\t\t\t\t\t\t" + date)
                         .setFont(font)
                         .setTextAlignment(TextAlignment.LEFT)
                         .setMarginTop(10);
@@ -98,7 +98,7 @@ public class PDFExporter {
                         .setMarginTop(20);
                 document.add(receive);
 
-                Paragraph change = new Paragraph("Tổng tiền: " + (totalBill-MainController.receiveCus)+ " VNĐ")
+                Paragraph change = new Paragraph("Tiền thối: " + (MainController.receiveCus-totalBill)+ " VNĐ")
                         .setFont(font)
                         .setTextAlignment(TextAlignment.RIGHT)
                         .setMarginTop(20);

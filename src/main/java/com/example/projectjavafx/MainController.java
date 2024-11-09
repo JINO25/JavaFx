@@ -309,6 +309,8 @@ public class MainController implements Initializable {
 
             int numberOfOrderToday = connect.getNumberOfOrderToday();
             numberOfOrderTotal.setText(String.valueOf(numberOfOrderToday));
+            int totalNumberOrderProducttoday = connect.getTotalNumberOfOrderToday();
+            orderTotalToday.setText(String.valueOf(totalNumberOrderProducttoday));
         }
 
         public void showLineChart() throws SQLException{
@@ -400,7 +402,6 @@ public class MainController implements Initializable {
             infoBox("Thêm sản phẩm thành công!", null, "Success");
             productName.setText("");
             type.getSelectionModel().clearSelection();
-            quantity.setText("");
             price.setText("");
         } else {
             infoBox("Vui lòng kiểm tra lại", null, "Failed");

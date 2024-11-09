@@ -386,10 +386,28 @@ public class DBConnect {
         while(rs.next()){
             total=rs.getInt(1);
         }
-        connection.close();
         return total;
     }
 
+    public int getTotalNumberOfOrderToday() throws SQLException {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime localDateTime = LocalDateTime.now();
+        String date = dateTimeFormatter.format(localDateTime);
+        int total=0;
+
+        String sql="SELECT sum(quantity) FROM order_detail\n" +
+                "                join `order` as o on o.OrderID = order_detail.orderID\n" +
+                "                where o.OrderDate=?\n" +
+                "                group by o.OrderDate;";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,date);
+        ResultSet rs = preparedStatement.executeQuery();
+        while(rs.next()){
+            total=rs.getInt(1);
+        }
+        connection.close();
+        return total;
+    }
     public ObservableList<XYChart.Data<String,Integer>> getDataForLineChart() throws SQLException {
         ObservableList<XYChart.Data<String,Integer>> list = FXCollections.observableArrayList();
 
