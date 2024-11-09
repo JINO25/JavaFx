@@ -81,7 +81,7 @@ public class DBConnect {
 
     public ObservableList<Product> listData() throws SQLException {
         ObservableList<Product> list= FXCollections.observableArrayList();
-        String sql="select p.productId, p.productName, p.price, p.photo, t.typeName from product as p join type_product as t on p.typeID = t.typeID;";
+        String sql="select p.productId, p.productName, p.price, p.photo, p.status ,t.typeName from product as p join type_product as t on p.typeID = t.typeID;";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ResultSet rs = preparedStatement.executeQuery();
 
@@ -91,7 +91,8 @@ public class DBConnect {
                     rs.getString("productName"),
                     rs.getString("typeName"),
                     rs.getInt("price"),
-                    rs.getString("photo")
+                    rs.getString("photo"),
+                    rs.getString("status")
             );
             list.add(product);
         }
@@ -107,6 +108,7 @@ public class DBConnect {
             type=2;
         }
 
+
         String sql ="insert into product(productName, price, photo, typeID) values (?,?,?,?)";
         PreparedStatement preparedStatement= connection.prepareStatement(sql);
         preparedStatement.setString(1,nameProduct);
@@ -118,20 +120,21 @@ public class DBConnect {
         return row;
     }
 
-    public int updateProduct(String id,String nameProduct, String typeProduct, String priceProduct, String photoProduct) throws SQLException {
+    public int updateProduct(String id,String nameProduct, String typeProduct, String priceProduct, String photoProduct, String status) throws SQLException {
         int type=0;
         if(typeProduct.equals("Food")){
             type=1;
         }else if(typeProduct.equals("Drink")){
             type=2;
         }
-        String sql ="update product set productName=?, typeID=?, price=?, photo=? where productID =?";
+        String sql ="update product set productName=?, typeID=?, price=?, photo=?, status=? where productID =?";
         PreparedStatement preparedStatement= connection.prepareStatement(sql);
         preparedStatement.setString(1,nameProduct);
         preparedStatement.setInt(2,type);
         preparedStatement.setInt(3,Integer.parseInt(priceProduct));
         preparedStatement.setString(4,photoProduct);
-        preparedStatement.setInt(5,Integer.parseInt(id));
+        preparedStatement.setString(5,status);
+        preparedStatement.setInt(6,Integer.parseInt(id));
         int row = preparedStatement.executeUpdate();
         connection.close();
         return row;
@@ -148,7 +151,8 @@ public class DBConnect {
     public ObservableList<Product> getDataProduct() throws SQLException {
         ObservableList<Product> list=FXCollections.observableArrayList();
 
-        String sql="select p.productId, p.productName, p.price, p.photo, t.typeName from product as p join type_product as t on p.typeID = t.typeID;";
+        String sql="select p.productId, p.productName, p.price, p.photo, p.status, t.typeName from product as p join type_product as t on p.typeID = t.typeID " +
+                "where p.status != 'Xoá';";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ResultSet rs = preparedStatement.executeQuery();
         while(rs.next()){
@@ -157,7 +161,8 @@ public class DBConnect {
                     rs.getString("productName"),
                     rs.getString("typeName"),
                     rs.getInt("price"),
-                    rs.getString("photo")
+                    rs.getString("photo"),
+                    rs.getString("status")
             );
             list.add(product);
         }

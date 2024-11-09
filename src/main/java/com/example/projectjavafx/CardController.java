@@ -61,13 +61,17 @@ public class CardController implements Initializable {
         Image image = new Image(file.toURI().toString(), 230, 127, false, true);
         prod_imageView.setImage(image);
         price=product.getPrice();
+        if(product.getStatus().equals("Hết")){
+            prod_addBtn.setText("Hết");
+            prod_addBtn.setDisable(true);
+        }
     }
 
 
     private int qty;
     private int price;
     public void setQuantity() {
-        spin = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0);
+        spin = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 0);
         prod_spinner.setValueFactory(spin);
     }
 

@@ -99,6 +99,9 @@ public class MainController implements Initializable {
     private ComboBox type;
 
     @FXML
+    private ComboBox typeStatus;
+
+    @FXML
     private TextField quantity;
 
     @FXML
@@ -119,7 +122,7 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Product, String> table_col_type;
     @FXML
-    private TableColumn<Product, Integer> table_col_stock;
+    private TableColumn<Product, Integer> table_col_status;
     @FXML
     private TableColumn<Product, Integer> table_col_price;
     @FXML
@@ -342,6 +345,11 @@ public class MainController implements Initializable {
         DBConnect dbConnect = new DBConnect();
         ObservableList<String> list = dbConnect.showTypeList();
         type.setItems(list);
+        ObservableList<String> listStatus = FXCollections.observableArrayList(Arrays.asList(
+                "Có",
+                "Hết",
+                "Xoá"));
+        typeStatus.setItems(listStatus);
     }
 
     public void showDataTable() throws SQLException {
@@ -352,6 +360,7 @@ public class MainController implements Initializable {
         table_col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
         table_col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
         table_col_photo.setCellValueFactory(new PropertyValueFactory<>("photo"));
+        table_col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         table_view.setItems(products);
     }
 
@@ -408,45 +417,44 @@ public class MainController implements Initializable {
         }
         showDataTable();
     }
-
     @FXML
     public void update_btn() throws SQLException, IOException {
         Window owner = updateButton.getScene().getWindow();
         String id = idProduct.getText();
         String name = productName.getText();
         String typeProduct = type.getValue().toString();
+        String status = typeStatus.getValue().toString();
         String priceProduct = price.getText();
-//        ObservableList<Product> products;
+
         Product product = table_view.getSelectionModel().getSelectedItem();
         String photo = product.getPhoto();
 
-        if(name.isEmpty() || typeProduct.isEmpty()|| priceProduct.isEmpty()){
+        if(name.isEmpty() || typeProduct.isEmpty()|| priceProduct.isEmpty() || status.isEmpty()){
             showAlert(Alert.AlertType.ERROR,owner,"Form Error!",
                     "Vui lòng nhập đầy đủ thông tin!");
             return;
         }
 
-        saveImg(photo);
-
-        if(!data.photo.isEmpty()){
+        if(data.photo!=null){
             photo=data.photo;
+            saveImg(photo);
+        }else{
             saveImg(photo);
         }
 
         System.out.println("photo: "+photo);
 
         DBConnect dbConnect = new DBConnect();
-        int row = dbConnect.updateProduct(id,name,typeProduct,priceProduct,photo);
+        int row = dbConnect.updateProduct(id,name,typeProduct,priceProduct,photo,status);
         if (row>0) {
             infoBox("Cập nhật thành công!", null, "Success");
             productName.setText("");
             type.getSelectionModel().clearSelection();
-            quantity.setText("");
             price.setText("");
+            showDataTable();
         } else {
             infoBox("Vui lòng kiểm tra lại", null, "Failed");
         }
-        showDataTable();
     }
 
     @FXML
@@ -462,8 +470,6 @@ public class MainController implements Initializable {
         infoBox("Xoá thành công",null,"Success");
         showDataTable();
     }
-
-
 
     private void saveImg(String name) throws IOException {
         String path = "E:\\Spring\\ProjectJavaFX\\src\\main\\resources\\Img";

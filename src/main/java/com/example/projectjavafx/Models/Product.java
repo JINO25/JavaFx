@@ -7,6 +7,17 @@ public class Product {
     private int price;
     private String photo;
     private int stock;
+    private String status;
+
+    public Product(String id, String name, String type, int price, String photo, String st) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.price = price;
+        this.photo = photo;
+        this.status=st;
+    }
+
 
     public Product(String id, String name, String type, int price, String photo) {
         this.id = id;
@@ -15,6 +26,7 @@ public class Product {
         this.price = price;
         this.photo = photo;
     }
+
 
     public Product(String id, String name, int price, String photo) {
         this.id = id;
@@ -79,4 +91,11 @@ public class Product {
         this.photo = photo;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

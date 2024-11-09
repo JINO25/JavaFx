@@ -277,7 +277,7 @@
                         <TextField fx:id="searching" layoutX="125.0" layoutY="27.0" onAction="#search" prefHeight="25.0" prefWidth="260.0" promptText="Nhập sản phẩm" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="inventory_form" layoutX="209.0" layoutY="189.0" prefHeight="710.0" prefWidth="792.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="inventory_form" layoutX="209.0" layoutY="189.0" prefHeight="710.0" prefWidth="792.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <SplitPane dividerPositions="0.5" layoutX="10.0" layoutY="9.0" orientation="VERTICAL" prefHeight="695.0" prefWidth="771.0">
                           <items>
@@ -290,6 +290,7 @@
                                           <TableColumn fx:id="table_col_type" prefWidth="88.0" text="Loại" />
                                           <TableColumn fx:id="table_col_price" prefWidth="151.0" text="Giá" />
                                           <TableColumn fx:id="table_col_photo" prefWidth="169.0" text="Ảnh" />
+                                          <TableColumn fx:id="table_col_status" prefWidth="151.0" text="Trạng thái" />
                                       </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -299,17 +300,17 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <Label layoutX="55.0" layoutY="56.0" prefHeight="28.0" prefWidth="67.0" text="Mã ID" />
+                                    <Label layoutX="59.0" layoutY="56.0" prefHeight="28.0" prefWidth="67.0" text="Mã ID" />
                                     <Label layoutX="55.0" layoutY="110.0" prefHeight="28.0" prefWidth="88.0" text="Tên Sản Phẩm" />
                                     <Label layoutX="317.0" layoutY="56.0" prefHeight="28.0" prefWidth="67.0" text="Loại" />
                                     <Label layoutX="317.0" layoutY="110.0" prefHeight="28.0" prefWidth="67.0" text="Giá" />
                                     <TextField fx:id="idProduct" disable="true" layoutX="143.0" layoutY="58.0" prefHeight="25.0" prefWidth="127.0" />
                                     <TextField fx:id="productName" layoutX="143.0" layoutY="112.0" prefHeight="25.0" prefWidth="128.0" />
                                     <TextField fx:id="price" layoutX="384.0" layoutY="113.0" prefHeight="25.0" prefWidth="131.0" />
-                                    <ComboBox fx:id="type" layoutX="405.0" layoutY="58.0" prefHeight="25.0" prefWidth="129.0" />
-                                    <AnchorPane layoutX="571.0" layoutY="25.0" prefHeight="150.0" prefWidth="148.0" stylesheets="@CSS/mainDesign.css">
+                                    <ComboBox fx:id="type" layoutX="385.0" layoutY="58.0" prefHeight="25.0" prefWidth="129.0" />
+                                    <AnchorPane layoutX="571.0" layoutY="25.0" prefHeight="150.0" prefWidth="132.0" stylesheets="@CSS/mainDesign.css">
                                        <children>
-                                          <ImageView fx:id="img" fitHeight="150.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow" />
+                                          <ImageView fx:id="img" fitHeight="150.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow" />
                                        </children>
                                        <styleClass>
                                           <String fx:value="shadow" />
@@ -334,13 +335,15 @@
                                           <String fx:value="radius" />
                                        </styleClass>
                                     </Button>
-                                    <Button layoutX="596.0" layoutY="193.0" mnemonicParsing="false" onAction="#import_btn" prefHeight="24.0" prefWidth="110.0" text="Import" />
+                                    <Button layoutX="597.0" layoutY="192.0" mnemonicParsing="false" onAction="#import_btn" prefHeight="24.0" prefWidth="110.0" text="Import" />
                                     <Button layoutX="561.0" layoutY="255.0" mnemonicParsing="false" onAction="#inventory_clear" prefHeight="43.0" prefWidth="110.0" stylesheets="@CSS/mainDesign.css" text="Clear">
                                        <styleClass>
                                           <String fx:value="btn" />
                                           <String fx:value="radius" />
                                        </styleClass>
                                     </Button>
+                                    <Label layoutX="56.0" layoutY="161.0" prefHeight="28.0" prefWidth="88.0" text="Trạng Thái" />
+                                    <ComboBox fx:id="typeStatus" layoutX="143.0" layoutY="163.0" prefHeight="25.0" prefWidth="129.0" />
                                  </children>
                               </AnchorPane>
                           </items>
