@@ -1,5 +1,6 @@
 package com.example.projectjavafx.ExportFile;
 import com.example.projectjavafx.DB.DBConnect;
+import com.example.projectjavafx.MainController;
 import com.example.projectjavafx.Models.Invoice;
 import com.example.projectjavafx.data;
 import com.itextpdf.kernel.font.PdfFont;
@@ -90,6 +91,18 @@ public class PDFExporter {
                         .setTextAlignment(TextAlignment.RIGHT)
                         .setMarginTop(20);
                 document.add(total);
+
+                Paragraph receive = new Paragraph("Tiền nhận: " + MainController.receiveCus + " VNĐ")
+                        .setFont(font)
+                        .setTextAlignment(TextAlignment.RIGHT)
+                        .setMarginTop(20);
+                document.add(receive);
+
+                Paragraph change = new Paragraph("Tổng tiền: " + (totalBill-MainController.receiveCus)+ " VNĐ")
+                        .setFont(font)
+                        .setTextAlignment(TextAlignment.RIGHT)
+                        .setMarginTop(20);
+                document.add(change);
 
                 document.close();
                 System.out.println("PDF created successfully!");

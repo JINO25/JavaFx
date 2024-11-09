@@ -44,7 +44,7 @@
                         <String fx:value="transparent" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="inventory_btn" layoutX="37.0" layoutY="284.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="48.0" prefWidth="118.0" stylesheets="@CSS/mainDesign.css" text="Kho">
+                  <Button fx:id="inventory_btn" layoutX="37.0" layoutY="284.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="48.0" prefWidth="118.0" stylesheets="@CSS/mainDesign.css" text="Quản lý menu">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="transparent" />
@@ -286,9 +286,8 @@
                                     <TableView fx:id="table_view" onMouseClicked="#selectDataTableView" prefHeight="337.0" prefWidth="768.0" stylesheets="@CSS/mainDesign.css">
                                       <columns>
                                         <TableColumn fx:id="table_col_id" prefWidth="75.0" text="ID" />
-                                        <TableColumn fx:id="table_col_name" prefWidth="166.0" text="Tên sản phẩm" />
-                                          <TableColumn fx:id="table_col_type" prefWidth="83.0" text="Loại" />
-                                          <TableColumn fx:id="table_col_stock" prefWidth="122.0" text="Kho" />
+                                        <TableColumn fx:id="table_col_name" prefWidth="207.0" text="Tên sản phẩm" />
+                                          <TableColumn fx:id="table_col_type" prefWidth="88.0" text="Loại" />
                                           <TableColumn fx:id="table_col_price" prefWidth="151.0" text="Giá" />
                                           <TableColumn fx:id="table_col_photo" prefWidth="169.0" text="Ảnh" />
                                       </columns>
@@ -300,16 +299,14 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <Label layoutX="317.0" layoutY="56.0" prefHeight="28.0" prefWidth="67.0" text="Số Lượng" />
                                     <Label layoutX="55.0" layoutY="56.0" prefHeight="28.0" prefWidth="67.0" text="Mã ID" />
                                     <Label layoutX="55.0" layoutY="110.0" prefHeight="28.0" prefWidth="88.0" text="Tên Sản Phẩm" />
-                                    <Label layoutX="55.0" layoutY="172.0" prefHeight="28.0" prefWidth="67.0" text="Loại" />
+                                    <Label layoutX="317.0" layoutY="56.0" prefHeight="28.0" prefWidth="67.0" text="Loại" />
                                     <Label layoutX="317.0" layoutY="110.0" prefHeight="28.0" prefWidth="67.0" text="Giá" />
                                     <TextField fx:id="idProduct" disable="true" layoutX="143.0" layoutY="58.0" prefHeight="25.0" prefWidth="127.0" />
                                     <TextField fx:id="productName" layoutX="143.0" layoutY="112.0" prefHeight="25.0" prefWidth="128.0" />
-                                    <TextField fx:id="quantity" layoutX="384.0" layoutY="58.0" prefHeight="25.0" prefWidth="130.0" />
                                     <TextField fx:id="price" layoutX="384.0" layoutY="113.0" prefHeight="25.0" prefWidth="131.0" />
-                                    <ComboBox fx:id="type" layoutX="143.0" layoutY="174.0" prefHeight="25.0" prefWidth="129.0" />
+                                    <ComboBox fx:id="type" layoutX="405.0" layoutY="58.0" prefHeight="25.0" prefWidth="129.0" />
                                     <AnchorPane layoutX="571.0" layoutY="25.0" prefHeight="150.0" prefWidth="148.0" stylesheets="@CSS/mainDesign.css">
                                        <children>
                                           <ImageView fx:id="img" fitHeight="150.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow" />

@@ -4,15 +4,14 @@ public class Product {
     private String id;
     private String name;
     private String type;
-    private int stock;
     private int price;
     private String photo;
+    private int stock;
 
-    public Product(String id, String name, String type, int stock, int price, String photo) {
+    public Product(String id, String name, String type, int price, String photo) {
         this.id = id;
         this.name = name;
         this.type = type;
-        this.stock = stock;
         this.price = price;
         this.photo = photo;
     }

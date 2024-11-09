@@ -348,7 +348,6 @@ public class MainController implements Initializable {
         table_col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         table_col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         table_col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
-        table_col_stock.setCellValueFactory(new PropertyValueFactory<>("stock"));
         table_col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
         table_col_photo.setCellValueFactory(new PropertyValueFactory<>("photo"));
         table_view.setItems(products);
@@ -360,8 +359,7 @@ public class MainController implements Initializable {
         int index = table_view.getSelectionModel().getSelectedIndex();
         idProduct.setText(product.getId());
         productName.setText(product.getName());
-        int stock = product.getStock();
-        quantity.setText(String.valueOf(stock));
+
         price.setText(String.valueOf(product.getPrice()));
         String path = "E:\\Spring\\ProjectJavaFX\\src\\main\\resources\\Img\\"+product.getPhoto();
         File file =new File(path);
@@ -386,10 +384,9 @@ public class MainController implements Initializable {
         Window owner = addButton.getScene().getWindow();
         String name = productName.getText();
         String typeProduct = type.getValue().toString();
-        String quantities = quantity.getText();
         String priceProduct = price.getText();
 
-        if(name.isEmpty() || typeProduct.isEmpty() || quantities.isEmpty() || priceProduct.isEmpty() || data.photo.isEmpty()){
+        if(name.isEmpty() || typeProduct.isEmpty() || priceProduct.isEmpty() || data.photo.isEmpty()){
             showAlert(Alert.AlertType.ERROR,owner,"Form Error!",
                     "Vui lòng nhập đầy đủ thông tin!");
             return;
@@ -398,7 +395,7 @@ public class MainController implements Initializable {
         saveImg(data.photo);
 
         DBConnect dbConnect = new DBConnect();
-        int row = dbConnect.addProduct(name,typeProduct,quantities,priceProduct,data.photo);
+        int row = dbConnect.addProduct(name,typeProduct,priceProduct,data.photo);
         if (row>0) {
             infoBox("Thêm sản phẩm thành công!", null, "Success");
             productName.setText("");
@@ -408,7 +405,7 @@ public class MainController implements Initializable {
         } else {
             infoBox("Vui lòng kiểm tra lại", null, "Failed");
         }
-
+        showDataTable();
     }
 
     @FXML
@@ -417,13 +414,12 @@ public class MainController implements Initializable {
         String id = idProduct.getText();
         String name = productName.getText();
         String typeProduct = type.getValue().toString();
-        String quantities = quantity.getText();
         String priceProduct = price.getText();
 //        ObservableList<Product> products;
         Product product = table_view.getSelectionModel().getSelectedItem();
         String photo = product.getPhoto();
 
-        if(name.isEmpty() || typeProduct.isEmpty() || quantities.isEmpty() || priceProduct.isEmpty()){
+        if(name.isEmpty() || typeProduct.isEmpty()|| priceProduct.isEmpty()){
             showAlert(Alert.AlertType.ERROR,owner,"Form Error!",
                     "Vui lòng nhập đầy đủ thông tin!");
             return;
@@ -431,8 +427,15 @@ public class MainController implements Initializable {
 
         saveImg(photo);
 
+        if(!data.photo.isEmpty()){
+            photo=data.photo;
+            saveImg(photo);
+        }
+
+        System.out.println("photo: "+photo);
+
         DBConnect dbConnect = new DBConnect();
-        int row = dbConnect.updateProduct(id,name,typeProduct,quantities,priceProduct,photo);
+        int row = dbConnect.updateProduct(id,name,typeProduct,priceProduct,photo);
         if (row>0) {
             infoBox("Cập nhật thành công!", null, "Success");
             productName.setText("");
@@ -442,6 +445,7 @@ public class MainController implements Initializable {
         } else {
             infoBox("Vui lòng kiểm tra lại", null, "Failed");
         }
+        showDataTable();
     }
 
     @FXML
@@ -455,6 +459,7 @@ public class MainController implements Initializable {
         DBConnect dbConnect = new DBConnect();
         dbConnect.deleteProduct(id);
         infoBox("Xoá thành công",null,"Success");
+        showDataTable();
     }
 
 
@@ -629,8 +634,11 @@ public class MainController implements Initializable {
 
     }
 
+    public static int receiveCus=0;
+
     public void menuDisplayChange(){
         String receive=menu_receive.getText();
+        receiveCus = Integer.parseInt(receive);
         String menuTotal = menu_total.getText();
 
         String numeric = menuTotal.substring(0,menuTotal.lastIndexOf(" "));
@@ -694,6 +702,7 @@ public class MainController implements Initializable {
         PDFExporter pdfExporter = new PDFExporter();
         pdfExporter.exportPDF(stage);
         menu_receipt.setDisable(true);
+        receiveCus=0;
     }
 
 
