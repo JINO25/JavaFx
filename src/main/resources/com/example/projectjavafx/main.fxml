@@ -56,7 +56,7 @@
                         <String fx:value="transparent" />
                      </styleClass>
                   </Button>
-                  <Button layoutX="37.0" layoutY="522.0" mnemonicParsing="false" onAction="#logOut" prefHeight="48.0" prefWidth="118.0" stylesheets="@CSS/mainDesign.css" text="Log Out">
+                  <Button layoutX="37.0" layoutY="593.0" mnemonicParsing="false" onAction="#logOut" prefHeight="48.0" prefWidth="118.0" stylesheets="@CSS/mainDesign.css" text="Log Out">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="transparent" />
@@ -77,6 +77,12 @@
                         </Label>
                      </children>
                   </Pane>
+                  <Button fx:id="staff_btn" layoutX="37.0" layoutY="481.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="48.0" prefWidth="118.0" stylesheets="@CSS/mainDesign.css" text="Nhân viên">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                  </Button>
                </children></AnchorPane>
          </left>
          <center>
@@ -437,6 +443,88 @@
                         </ScrollPane>
                      </children>
                   </AnchorPane>
+                  <SplitPane fx:id="staff_form" dividerPositions="0.5" layoutX="280.0" layoutY="206.0" orientation="VERTICAL" prefHeight="710.0" prefWidth="788.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TableView fx:id="staffTable" layoutX="72.0" layoutY="51.0" onMouseClicked="#selectDataStaffTableView" prefHeight="351.0" prefWidth="786.0" stylesheets="@CSS/mainDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                    <TableColumn fx:id="staff_col_id" prefWidth="47.0" text="STT" />
+                                  <TableColumn fx:id="staff_col_name" prefWidth="157.0" text="Tên" />
+                                  <TableColumn fx:id="staff_col_email" prefWidth="151.0" text="Email" />
+                                    <TableColumn fx:id="staff_col_phone" prefWidth="206.0" text="Số điện thoại" />
+                                    <TableColumn fx:id="staff_col_role" minWidth="6.0" prefWidth="89.0" text="Vai trò" />
+                                    <TableColumn fx:id="staff_col_pwd" prefWidth="134.0" text="Mật khẩu" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <Label layoutX="64.0" layoutY="48.0" text="Tên">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="64.0" layoutY="97.0" text="Email">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="342.0" layoutY="48.0" text="Điện thoại">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="342.0" layoutY="97.0" prefHeight="30.0" prefWidth="64.0" text="Vai trò">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="64.0" layoutY="146.0" text="Mật khẩu">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="staffPwd" layoutX="158.0" layoutY="149.0" />
+                              <TextField fx:id="staffEmail" layoutX="159.0" layoutY="100.0" />
+                              <TextField fx:id="staffName" layoutX="159.0" layoutY="51.0" />
+                              <TextField fx:id="staffPhone" layoutX="447.0" layoutY="51.0" />
+                              <TextField fx:id="staffRole" layoutX="447.0" layoutY="100.0" />
+                              <Button fx:id="addStaffBtn" layoutX="162.0" layoutY="230.0" mnemonicParsing="false" onAction="#addStaff" prefHeight="37.0" prefWidth="72.0" stylesheets="@CSS/mainDesign.css" text="Thêm">
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="radius" />
+                                    <String fx:value="white-bg" />
+                                 </styleClass>
+                              </Button>
+                              <Button fx:id="updateStaffBtn" layoutX="290.0" layoutY="230.0" mnemonicParsing="false" onAction="#updateStaff" prefHeight="37.0" prefWidth="84.0" stylesheets="@CSS/mainDesign.css" text="Cập nhật">
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="radius" />
+                                    <String fx:value="white-bg" />
+                                 </styleClass>
+                              </Button>
+                              <Button layoutX="433.0" layoutY="230.0" mnemonicParsing="false" onAction="#clearTextStaff" prefHeight="37.0" prefWidth="72.0" stylesheets="@CSS/mainDesign.css" text="Clear">
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="radius" />
+                                    <String fx:value="white-bg" />
+                                 </styleClass>
+                              </Button>
+                              <Label layoutX="342.0" layoutY="147.0" prefHeight="30.0" prefWidth="96.0" text="Trạng thái">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="staffStatus" layoutX="447.0" layoutY="150.0" prefHeight="25.0" prefWidth="114.0" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
                </children>
             </AnchorPane>
          </center>

@@ -3,6 +3,7 @@ package com.example.projectjavafx;
 import com.example.projectjavafx.DB.DBConnect;
 import com.example.projectjavafx.ExportFile.PDFExporter;
 import com.example.projectjavafx.Models.Product;
+import com.example.projectjavafx.Models.Staff;
 import com.example.projectjavafx.Models.Staticstics;
 import com.example.projectjavafx.Models.Table;
 import javafx.collections.FXCollections;
@@ -51,6 +52,50 @@ public class MainController implements Initializable {
     @FXML
     private AnchorPane menu_form;
 
+    @FXML
+    private SplitPane staff_form;
+
+    @FXML
+    private TextField staffEmail;
+
+    @FXML
+    private TextField staffName;
+
+    @FXML
+    private TextField staffPhone;
+
+    @FXML
+    private TextField staffPwd;
+
+    @FXML
+    private TextField staffRole;
+
+    @FXML
+    private ComboBox<String> staffStatus;
+
+    @FXML
+    private TableView<Staff> staffTable;
+
+    @FXML
+    private TableColumn<Staff, String> staff_col_email;
+
+    @FXML
+    private TableColumn<Staff, Integer> staff_col_id;
+
+    @FXML
+    private TableColumn<Staff, String> staff_col_name;
+
+    @FXML
+    private TableColumn<Staff, String> staff_col_phone;
+
+    @FXML
+    private TableColumn<Staff, String> staff_col_pwd;
+
+    @FXML
+    private TableColumn<Staff, String> staff_col_role;
+
+    @FXML
+    private Button staff_btn;
 
     @FXML
     private Button dashboard_btn;
@@ -251,24 +296,32 @@ public class MainController implements Initializable {
             inventory_form.setVisible(false);
             menu_form.setVisible(false);
             statistic_form.setVisible(false);
+            staff_form.setVisible(false);
             booking_table_form.setVisible(false);
 
             showDashBoard();
             showLineChart();
         } else if (event.getSource() == inventory_btn) {
-            dashboard_form.setVisible(false);
-            inventory_form.setVisible(true);
-            menu_form.setVisible(false);
-            statistic_form.setVisible(false);
-            booking_table_form.setVisible(false);
+            Window window = inventory_btn.getScene().getWindow();
+            if(data.role.equals("admin")){
+                dashboard_form.setVisible(false);
+                inventory_form.setVisible(true);
+                menu_form.setVisible(false);
+                statistic_form.setVisible(false);
+                staff_form.setVisible(false);
+                booking_table_form.setVisible(false);
 
-            inventoryTypeList();
-            showDataTable();
+                inventoryTypeList();
+                showDataTable();
+            }else{
+                showAlert(Alert.AlertType.ERROR,window,"Error","Bạn không có quyền truy cập");
+            }
         } else if (event.getSource() == menu_btn) {
             dashboard_form.setVisible(false);
             inventory_form.setVisible(false);
             menu_form.setVisible(true);
             statistic_form.setVisible(false);
+            staff_form.setVisible(false);
             booking_table_form.setVisible(false);
 
             menuShow();
@@ -279,15 +332,33 @@ public class MainController implements Initializable {
             inventory_form.setVisible(false);
             menu_form.setVisible(false);
             statistic_form.setVisible(true);
+            staff_form.setVisible(false);
             booking_table_form.setVisible(false);
+
         } else if(event.getSource() == booking_table_btn){
             dashboard_form.setVisible(false);
             inventory_form.setVisible(false);
             menu_form.setVisible(false);
             statistic_form.setVisible(false);
             booking_table_form.setVisible(true);
+            staff_form.setVisible(false);
 
             tableShow();
+        } else if (event.getSource() == staff_btn) {
+            Window window = inventory_btn.getScene().getWindow();
+            if(data.role.equals("admin")){
+                dashboard_form.setVisible(false);
+                inventory_form.setVisible(false);
+                menu_form.setVisible(false);
+                statistic_form.setVisible(false);
+                booking_table_form.setVisible(false);
+                staff_form.setVisible(true);
+
+                listStatusStaff();
+                showStaffTable();
+            }else{
+                showAlert(Alert.AlertType.ERROR,window,"Error","Bạn không có quyền truy cập");
+            }
         }
 
     }
@@ -394,7 +465,12 @@ public class MainController implements Initializable {
     public void add_btn() throws IOException, SQLException {
         Window owner = addButton.getScene().getWindow();
         String name = productName.getText();
-        String typeProduct = type.getValue().toString();
+        String typeProduct;
+        if(type.getValue() == null){
+            typeProduct = "";
+        }else{
+            typeProduct = type.getValue().toString();
+        }
         String priceProduct = price.getText();
 
         if(name.isEmpty() || typeProduct.isEmpty() || priceProduct.isEmpty() || data.photo.isEmpty()){
@@ -684,7 +760,10 @@ public class MainController implements Initializable {
     public void checkPaymentClick() throws IOException, SQLException {
         Window owner = payment.getScene().getWindow();
         DBConnect dbConnect = new DBConnect();
-        if(menu_table == null){
+
+        if(menu_receive.getText().isEmpty()){
+            showAlert(Alert.AlertType.ERROR, owner, "Error","Vui lòng số tiền nhận từ khách để thanh toán");
+        }else if(menu_table == null){
             showAlert(Alert.AlertType.ERROR, owner, "Error","Vui lòng order để thanh toán");
         }else{
             String menuTotal = menu_total.getText();
@@ -842,7 +921,6 @@ public ObservableList<Table> tableGetData() throws SQLException {
 //            showPercentagePieChart(pieCharts);
         }
     }
-
     public void showPercentagePieChart(ObservableList<PieChart.Data> pieCharts){
         statistic_chart.setData(pieCharts);
 
@@ -854,6 +932,101 @@ public ObservableList<Table> tableGetData() throws SQLException {
             double percentage = (data.getPieValue() / total) * 100;
             data.setName(String.format("%s (%.1f%%)", data.getName(), percentage));
         }
+    }
+
+
+    //  Staff-----------------------------------------
+    public void showStaffTable() throws SQLException {
+        DBConnect dbConnect = new DBConnect();
+        ObservableList list = dbConnect.getAllStaff();
+
+        staff_col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        staff_col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        staff_col_email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        staff_col_phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        staff_col_role.setCellValueFactory(new PropertyValueFactory<>("role"));
+        staff_col_pwd.setCellValueFactory(new PropertyValueFactory<>("pwd"));
+        staffTable.setItems(list);
+
+    }
+
+    public void selectDataStaffTableView(){
+        Staff staff = staffTable.getSelectionModel().getSelectedItem();
+
+        staffName.setText(staff.getName());
+        staffPhone.setText(staff.getPhone());
+        staffEmail.setText(staff.getEmail());
+        staffRole.setText(staff.getRole());
+        staffPwd.setText(staff.getPwd());
+
+    }
+
+    @FXML
+    private Button addStaffBtn;
+
+    @FXML
+    private Button updateStaffBtn;
+
+    public void listStatusStaff(){
+        ObservableList<String> list = FXCollections.observableArrayList();
+        list.add("Còn");
+        list.add("Nghỉ");
+        staffStatus.setItems(list);
+    }
+
+    public void addStaff() throws SQLException {
+        Window owner = addButton.getScene().getWindow();
+        DBConnect dbConnect = new DBConnect();
+
+        String name = staffName.getText();
+        String email = staffEmail.getText();
+        String pwd = staffPwd.getText();
+        String phone = staffPhone.getText();
+        String role = staffRole.getText();
+        String status;
+        if(staffStatus.getValue() == null || name.isEmpty() || email.isEmpty() || pwd.isEmpty() || phone.isEmpty() || role.isEmpty()){
+            showAlert(Alert.AlertType.ERROR,owner,"Error","Vui lòng nhập đủ thông tin!");
+        }else{
+            status = staffStatus.getValue().toString();
+            int rs = dbConnect.addStaff(name,email,phone,pwd,status,role);
+            if(rs>0){
+                showAlert(Alert.AlertType.INFORMATION,owner,"Success","Thêm thành công");
+                showStaffTable();
+            }
+        }
+
+
+    }
+
+    public void updateStaff() throws SQLException {
+        Window owner = updateButton.getScene().getWindow();
+        DBConnect dbConnect = new DBConnect();
+
+        String name = staffName.getText();
+        String email = staffEmail.getText();
+        String pwd = staffPwd.getText();
+        String phone = staffPhone.getText();
+        String role = staffRole.getText();
+        String status;
+        if(staffStatus.getValue() == null || name.isEmpty() || email.isEmpty() || pwd.isEmpty() || phone.isEmpty() || role.isEmpty()){
+            showAlert(Alert.AlertType.ERROR,owner,"Error","Vui lòng nhập đủ thông tin!");
+        }else{
+            status = staffStatus.getValue().toString();
+            int rs = dbConnect.updateStaff(name,email,phone,pwd,status,role);
+            if(rs>0){
+                showAlert(Alert.AlertType.INFORMATION,owner,"Success","Cập nhật thành công");
+                showStaffTable();
+            }
+        }
+    }
+
+    public void clearTextStaff(){
+        staffName.setText("");
+        staffEmail.setText("");
+        staffPwd.setText("");
+        staffPhone.setText("");
+        staffRole.setText("");
+
     }
 
     // Alert ----------------------------------------------------

@@ -59,12 +59,23 @@ public class PDFExporter {
                         .setFontSize(20);
                 document.add(title);
 
+                Paragraph idInvoice = new Paragraph("Mã hoá đơn: " + list.get(0).toString())
+                        .setFont(font)
+                        .setTextAlignment(TextAlignment.LEFT)
+                        .setMarginTop(10);
+                document.add(idInvoice);
 
-                Paragraph employeeAndDate = new Paragraph("Nhân viên: " + data.userName + "\t\t\t\t\t\t" + date)
+                Paragraph employeeAndDate = new Paragraph("Nhân viên: " + data.userName)
                         .setFont(font)
                         .setTextAlignment(TextAlignment.LEFT)
                         .setMarginTop(10);
                 document.add(employeeAndDate);
+
+                Paragraph datePrint = new Paragraph("Ngày: " + date)
+                        .setFont(font)
+                        .setTextAlignment(TextAlignment.LEFT)
+                        .setMarginTop(10);
+                document.add(datePrint);
 
 
                 float[] columnWidths = {200, 100, 100};

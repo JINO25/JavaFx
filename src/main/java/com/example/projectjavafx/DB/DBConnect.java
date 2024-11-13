@@ -1,9 +1,6 @@
 package com.example.projectjavafx.DB;
 import com.example.projectjavafx.MainController;
-import com.example.projectjavafx.Models.Invoice;
-import com.example.projectjavafx.Models.Product;
-import com.example.projectjavafx.Models.Staticstics;
-import com.example.projectjavafx.Models.Table;
+import com.example.projectjavafx.Models.*;
 import com.example.projectjavafx.data;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -56,6 +53,7 @@ public class DBConnect {
         if (rs.next()) {
             data.id=rs.getInt("id");
             data.userName=rs.getString("name");
+            data.role=rs.getString("role");
             System.out.println(rs.getString("name"));
             System.out.println("Login successful for: " + email);
             return true;
@@ -173,7 +171,7 @@ public class DBConnect {
     public ObservableList<Product> getDataFromSearching(String name) throws SQLException {
         ObservableList<Product> list=FXCollections.observableArrayList();
 
-        String sql="select p.productId, p.productName, p.price, p.photo, t.typeName from product as p join type_product as t on p.typeID = t.typeID where p.productName like ?;";
+        String sql="select p.productId, p.productName, p.price, p.photo,p.status, t.typeName from product as p join type_product as t on p.typeID = t.typeID where p.productName like ?;";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1,"%"+name+"%");
         ResultSet rs = preparedStatement.executeQuery();
@@ -183,7 +181,8 @@ public class DBConnect {
                     rs.getString("productName"),
                     rs.getString("typeName"),
                     rs.getInt("price"),
-                    rs.getString("photo")
+                    rs.getString("photo"),
+                    rs.getString("status")
             );
             list.add(product);
         }
@@ -305,7 +304,7 @@ public class DBConnect {
 
     public List<Invoice> getInvoice(int idOrder) throws SQLException {
         List<Invoice> list = new ArrayList<>();
-        String sql="select p.productName, o.quantity, p.price, b.total, b.billDate from bill as b \n" +
+        String sql="select b.billID,p.productName, o.quantity, p.price, b.total, b.billDate from bill as b \n" +
                 "join order_detail as o on b.orderID=o.orderID\n" +
                 "join product as p on p.productID = o.productID\n" +
                 "where b.orderID =?";
@@ -315,6 +314,7 @@ public class DBConnect {
         ResultSet rs = preparedStatement.executeQuery();
         while(rs.next()){
             Invoice invoice = new Invoice(
+                    rs.getInt("billID"),
                     rs.getString("productName"),
                     rs.getInt("quantity"),
                     rs.getInt("price"),
@@ -454,8 +454,8 @@ public class DBConnect {
                     "join type_product t on p.typeID=t.typeID\n" +
                     "join order_detail o on o.productID = p.productID\n" +
                     "join bill b on b.orderID = o.orderID\n" +
-                    "where p.productName like ? and b.billDate =?\n" +
-                    "group by  p.productID, p.productName, o.quantity;";
+                    "where p.productName like ? and b.billDate =?\n";
+//                    "group by  p.productID, p.productName, o.quantity;";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,"%"+name+"%");
             preparedStatement.setString(2,date);
@@ -474,12 +474,14 @@ public class DBConnect {
             }
             return list;
         }else if(name.isEmpty()){
+            System.out.println("hehe");
             sql="select p.productID,p.productName,t.typeName, o.quantity as numberOfOrder, (p.price * o.quantity) as totalRevenue ,b.billDate from product p\n" +
                     "join type_product t on p.typeID=t.typeID\n" +
                     "join order_detail o on o.productID = p.productID\n" +
-                    "join bill b on b.orderID = o.orderID\n" +
-                    "where b.billDate =?\n" +
-                    "group by  p.productID, p.productName, o.quantity;";
+                    "join `order` ord on ord.OrderID = o.orderID\n"+
+                    "join bill b on b.orderID = ord.OrderID\n"+
+                    "where b.billDate=?\n";
+//                    "group by  p.productID, p.productName, o.quantity;";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,date);
             rs = preparedStatement.executeQuery();
@@ -501,8 +503,8 @@ public class DBConnect {
                     "join type_product t on p.typeID=t.typeID\n" +
                     "join order_detail o on o.productID = p.productID\n" +
                     "join bill b on b.orderID = o.orderID\n" +
-                    "where p.productName like ?\n" +
-                    "group by  p.productID, p.productName, o.quantity, b.billDate;";
+                    "where p.productName like ?\n";
+//                    "group by  p.productID, p.productName, o.quantity, b.billDate;";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,"%"+name+"%");
             rs = preparedStatement.executeQuery();
@@ -534,8 +536,8 @@ public class DBConnect {
                     "join type_product t on p.typeID=t.typeID\n" +
                     "join order_detail o on o.productID = p.productID\n" +
                     "join bill b on b.orderID = o.orderID\n" +
-                    "where p.productName like ? and month(b.billDate) =?\n" +
-                    "group by  p.productID, p.productName, o.quantity, b.billDate;";
+                    "where p.productName like ? and month(b.billDate) =?\n";
+//                    "group by  p.productID, p.productName, o.quantity, b.billDate;";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,"%"+name+"%");
             preparedStatement.setString(2,date);
@@ -558,8 +560,8 @@ public class DBConnect {
                     "join type_product t on p.typeID=t.typeID\n" +
                     "join order_detail o on o.productID = p.productID\n" +
                     "join bill b on b.orderID = o.orderID\n" +
-                    "where month(b.billDate) =?\n" +
-                    "group by  p.productID, p.productName, o.quantity, b.billDate;";
+                    "where month(b.billDate) =?\n";
+//                    "group by  p.productID, p.productName, o.quantity, b.billDate;";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,date);
             rs = preparedStatement.executeQuery();
@@ -581,8 +583,8 @@ public class DBConnect {
                     "join type_product t on p.typeID=t.typeID\n" +
                     "join order_detail o on o.productID = p.productID\n" +
                     "join bill b on b.orderID = o.orderID\n" +
-                    "where p.productName like ?\n" +
-                    "group by  p.productID, p.productName, o.quantity, b.billDate;";
+                    "where p.productName like ?\n";
+//                    "group by  p.productID, p.productName, o.quantity, b.billDate;";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,"%"+name+"%");
             rs = preparedStatement.executeQuery();
@@ -614,8 +616,8 @@ public class DBConnect {
                     "join type_product t on p.typeID=t.typeID\n" +
                     "join order_detail o on o.productID = p.productID\n" +
                     "join bill b on b.orderID = o.orderID\n" +
-                    "where p.productName like ? and month(b.billDate) >= ? and month(b.billDate) <= ? \n" +
-                    "group by  p.productID, p.productName ,o.quantity, b.billDate;";
+                    "where p.productName like ? and month(b.billDate) >= ? and month(b.billDate) <= ? \n";
+//                    "group by  p.productID, p.productName ,o.quantity, b.billDate;";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,"%"+name+"%");
             preparedStatement.setString(2,fromDate);
@@ -639,8 +641,8 @@ public class DBConnect {
                     "join type_product t on p.typeID=t.typeID\n" +
                     "join order_detail o on o.productID = p.productID\n" +
                     "join bill b on b.orderID = o.orderID\n" +
-                    "where month(b.billDate) >= ? and month(b.billDate) <= ? \n" +
-                    "group by  p.productID, p.productName ,o.quantity, b.billDate;";
+                    "where month(b.billDate) >= ? and month(b.billDate) <= ? \n";
+//                    "group by  p.productID, p.productName ,o.quantity, b.billDate;";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,fromDate);
             preparedStatement.setString(2,toDate);
@@ -663,8 +665,8 @@ public class DBConnect {
                     "join type_product t on p.typeID=t.typeID\n" +
                     "join order_detail o on o.productID = p.productID\n" +
                     "join bill b on b.orderID = o.orderID\n" +
-                    "where p.productName like ?\n" +
-                    "group by  p.productID, p.productName ,o.quantity, b.billDate;";
+                    "where p.productName like ?\n";
+//                    "group by  p.productID, p.productName ,o.quantity, b.billDate;";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,"%"+name+"%");
             rs = preparedStatement.executeQuery();
@@ -726,5 +728,56 @@ public class DBConnect {
         return list;
     }
 
+    public ObservableList<Staff> getAllStaff() throws SQLException {
+        String sql="select * from user";
+        ObservableList<Staff> list = FXCollections.observableArrayList();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet rs = preparedStatement.executeQuery();
+        while(rs.next()){
+            Staff staff = new Staff(
+                    rs.getInt(1),
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("phone"),
+                    rs.getString("pwd"),
+                    rs.getString("role"),
+                    rs.getString("status")
+            );
+            list.add(staff);
+        }
+        connection.close();
+        return list;
+    }
+
+    public int addStaff(String name,String email,String phone,String pwd, String status,String role) throws SQLException {
+        String sql="insert into user(name,email,phone,pwd,status,role) values(?,?,?,?,?,?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,name);
+        preparedStatement.setString(2,email);
+        preparedStatement.setString(3,phone);
+        preparedStatement.setString(4,pwd);
+        preparedStatement.setString(5,status);
+        preparedStatement.setString(6,role);
+
+        int row = preparedStatement.executeUpdate();
+        connection.close();
+        return row;
+    }
+
+    public int updateStaff(String name,String email,String phone,String pwd, String status,String role) throws SQLException {
+        String sql="Update user set name=?, email=?, phone=?, pwd=?, status=?, role=? where email=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,name);
+        preparedStatement.setString(2,email);
+        preparedStatement.setString(3,phone);
+        preparedStatement.setString(4,pwd);
+        preparedStatement.setString(5,status);
+        preparedStatement.setString(6,role);
+        preparedStatement.setString(7,email);
+
+        int row = preparedStatement.executeUpdate();
+        connection.close();
+        return row;
+    }
 
 }

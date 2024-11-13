@@ -1,18 +1,29 @@
 package com.example.projectjavafx.Models;
 
 public class Invoice {
+
+    private int id;
     private String name;
     private int quantity;
     private int price;
     private int total;
     private String date;
 
-    public Invoice(String name, int quantity, int price, int total, String date) {
+    public Invoice(int id,String name, int quantity, int price, int total, String date) {
+        this.id=id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.total = total;
         this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

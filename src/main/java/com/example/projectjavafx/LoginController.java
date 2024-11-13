@@ -51,11 +51,11 @@ public class LoginController {
             String password = passwordField.getText();
 
             DBConnect dbConnect = new DBConnect();
-//            boolean flag = dbConnect.checkAccount(emailId,password);
-            boolean flag = true;
+            boolean flag = dbConnect.checkAccount(emailId,password);
+//            boolean flag = true;
 
             if (!flag) {
-                infoBox("Please enter correct Email and Password", null, "Failed");
+                showAlert(AlertType.ERROR,owner,"Error","Email hoặc mật khẩu không đúng!");
             } else {
                 infoBox("Login Successful!", null, "Success");
                 FXMLLoader root = new FXMLLoader(getClass().getResource("main.fxml"));
