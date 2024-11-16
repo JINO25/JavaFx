@@ -59,7 +59,7 @@ public class PDFExporter {
                         .setFontSize(20);
                 document.add(title);
 
-                Paragraph idInvoice = new Paragraph("Mã hoá đơn: " + list.get(0).toString())
+                Paragraph idInvoice = new Paragraph("Mã hoá đơn: " + list.get(0).getId())
                         .setFont(font)
                         .setTextAlignment(TextAlignment.LEFT)
                         .setMarginTop(10);

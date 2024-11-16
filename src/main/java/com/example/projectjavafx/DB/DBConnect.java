@@ -323,6 +323,7 @@ public class DBConnect {
             );
             list.add(invoice);
         }
+        orderId=0;
         return list;
     }
 
@@ -532,15 +533,16 @@ public class DBConnect {
         PreparedStatement preparedStatement;
         ResultSet rs;
         if(!name.isEmpty() && !date.isEmpty()){
-            sql="select p.productID,p.productName,t.typeName, o.quantity as numberOfOrder, (p.price * o.quantity) as totalRevenue ,b.billDate from product p\n" +
-                    "join type_product t on p.typeID=t.typeID\n" +
-                    "join order_detail o on o.productID = p.productID\n" +
-                    "join bill b on b.orderID = o.orderID\n" +
-                    "where p.productName like ? and month(b.billDate) =?\n";
-//                    "group by  p.productID, p.productName, o.quantity, b.billDate;";
+            sql="SELECT p.productID, p.productName, t.typeName, SUM(o.quantity) AS numberOfOrder, SUM(p.price * o.quantity) AS totalRevenue, b.billDate\n" +
+                    "FROM product p\n" +
+                    "JOIN type_product t ON p.typeID = t.typeID\n" +
+                    "JOIN order_detail o ON o.productID = p.productID\n" +
+                    "JOIN bill b ON b.orderID = o.orderID\n" +
+                    "WHERE month(b.billDate) = ? and p.productName like ? \n" +
+                    "GROUP BY p.productID, p.productName, t.typeName, b.billDate;";
             preparedStatement=connection.prepareStatement(sql);
-            preparedStatement.setString(1,"%"+name+"%");
-            preparedStatement.setString(2,date);
+            preparedStatement.setString(1,date);
+            preparedStatement.setString(2,"%"+name+"%");
             rs = preparedStatement.executeQuery();
 
             while(rs.next()){
@@ -556,12 +558,14 @@ public class DBConnect {
             }
             return list;
         }else if(name.isEmpty()){
-            sql="select p.productID,p.productName,t.typeName, o.quantity as numberOfOrder, (p.price * o.quantity) as totalRevenue ,b.billDate from product p\n" +
-                    "join type_product t on p.typeID=t.typeID\n" +
-                    "join order_detail o on o.productID = p.productID\n" +
-                    "join bill b on b.orderID = o.orderID\n" +
-                    "where month(b.billDate) =?\n";
-//                    "group by  p.productID, p.productName, o.quantity, b.billDate;";
+            sql="SELECT p.productID, p.productName, t.typeName, SUM(o.quantity) AS numberOfOrder, SUM(p.price * o.quantity) AS totalRevenue, b.billDate\n" +
+                    "FROM product p\n" +
+                    "JOIN type_product t ON p.typeID = t.typeID\n" +
+                    "JOIN order_detail o ON o.productID = p.productID\n" +
+                    "JOIN bill b ON b.orderID = o.orderID\n" +
+                    "WHERE month(b.billDate) = ?\n" +
+                    "GROUP BY p.productID, p.productName, t.typeName, b.billDate;";
+
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,date);
             rs = preparedStatement.executeQuery();
@@ -579,12 +583,14 @@ public class DBConnect {
             }
             return list;
         }else{
-            sql="select p.productID,p.productName,t.typeName, o.quantity as numberOfOrder, (p.price * o.quantity) as totalRevenue ,b.billDate from product p\n" +
-                    "join type_product t on p.typeID=t.typeID\n" +
-                    "join order_detail o on o.productID = p.productID\n" +
-                    "join bill b on b.orderID = o.orderID\n" +
-                    "where p.productName like ?\n";
-//                    "group by  p.productID, p.productName, o.quantity, b.billDate;";
+            sql="SELECT p.productID, p.productName, t.typeName, SUM(o.quantity) AS numberOfOrder, SUM(p.price * o.quantity) AS totalRevenue, b.billDate\n" +
+                    "FROM product p\n" +
+                    "JOIN type_product t ON p.typeID = t.typeID\n" +
+                    "JOIN order_detail o ON o.productID = p.productID\n" +
+                    "JOIN bill b ON b.orderID = o.orderID\n" +
+                    "WHERE p.productName like ? \n" +
+                    "GROUP BY p.productID, p.productName, t.typeName, b.billDate;";
+
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,"%"+name+"%");
             rs = preparedStatement.executeQuery();
@@ -612,12 +618,12 @@ public class DBConnect {
         PreparedStatement preparedStatement;
         ResultSet rs;
         if(!name.isEmpty() && !fromDate.isEmpty() && !toDate.isEmpty()){
-            sql="select p.productID,p.productName,t.typeName, o.quantity as numberOfOrder, (p.price * o.quantity) as totalRevenue ,b.billDate from product p\n" +
+            sql="SELECT p.productID, p.productName, t.typeName, SUM(o.quantity) AS numberOfOrder, SUM(p.price * o.quantity) AS totalRevenue, b.billDate from product p\n" +
                     "join type_product t on p.typeID=t.typeID\n" +
                     "join order_detail o on o.productID = p.productID\n" +
                     "join bill b on b.orderID = o.orderID\n" +
-                    "where p.productName like ? and month(b.billDate) >= ? and month(b.billDate) <= ? \n";
-//                    "group by  p.productID, p.productName ,o.quantity, b.billDate;";
+                    "where p.productName like ? and month(b.billDate) >= ? and month(b.billDate) <= ? \n" +
+                    "GROUP BY p.productID, p.productName, t.typeName, b.billDate;";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,"%"+name+"%");
             preparedStatement.setString(2,fromDate);
@@ -637,12 +643,12 @@ public class DBConnect {
             }
             return list;
         }else if(name.isEmpty()){
-            sql="select p.productID,p.productName,t.typeName, o.quantity as numberOfOrder, (p.price * o.quantity) as totalRevenue ,b.billDate from product p\n" +
+            sql="SELECT p.productID, p.productName, t.typeName, SUM(o.quantity) AS numberOfOrder, SUM(p.price * o.quantity) AS totalRevenue, b.billDate from product p\n" +
                     "join type_product t on p.typeID=t.typeID\n" +
                     "join order_detail o on o.productID = p.productID\n" +
                     "join bill b on b.orderID = o.orderID\n" +
-                    "where month(b.billDate) >= ? and month(b.billDate) <= ? \n";
-//                    "group by  p.productID, p.productName ,o.quantity, b.billDate;";
+                    "where month(b.billDate) >= ? and month(b.billDate) <= ? \n" +
+                    "GROUP BY p.productID, p.productName, t.typeName, b.billDate;";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,fromDate);
             preparedStatement.setString(2,toDate);
@@ -661,12 +667,12 @@ public class DBConnect {
             }
             return list;
         }else{
-            sql="select p.productID,p.productName,t.typeName, o.quantity as numberOfOrder, (p.price * o.quantity) as totalRevenue ,b.billDate from product p\n" +
+            sql="SELECT p.productID, p.productName, t.typeName, SUM(o.quantity) AS numberOfOrder, SUM(p.price * o.quantity) AS totalRevenue, b.billDate from product p\n" +
                     "join type_product t on p.typeID=t.typeID\n" +
                     "join order_detail o on o.productID = p.productID\n" +
                     "join bill b on b.orderID = o.orderID\n" +
-                    "where p.productName like ?\n";
-//                    "group by  p.productID, p.productName ,o.quantity, b.billDate;";
+                    "where p.productName like ?\n" +
+                    "GROUP BY p.productID, p.productName, t.typeName, b.billDate;";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,"%"+name+"%");
             rs = preparedStatement.executeQuery();
