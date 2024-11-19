@@ -92,6 +92,9 @@ public class MainController implements Initializable {
     private TableColumn<Staff, String> staff_col_pwd;
 
     @FXML
+    private TableColumn<Staff, String> staff_col_status;
+
+    @FXML
     private TableColumn<Staff, String> staff_col_role;
 
     @FXML
@@ -226,7 +229,7 @@ public class MainController implements Initializable {
     private ObservableList<Product> cardList = FXCollections.observableArrayList();
     private ObservableList<Table> tableList = FXCollections.observableArrayList();
 
-    private CardController cardController;
+//    private CardController cardController;
 
     @FXML
     private TextField nameProduct;
@@ -618,8 +621,9 @@ public class MainController implements Initializable {
             try {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/projectjavafx/card.fxml"));
                 AnchorPane pane = load.load();
-                cardController=load.getController();
+                CardController cardController=load.getController();
                 cardController.setData(cardList.get(i));
+                cardController.setMainController(this);
                 if (column == 2) {
                     column = 0;
                     row += 1;
@@ -650,8 +654,9 @@ public class MainController implements Initializable {
             try {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/projectjavafx/card.fxml"));
                 AnchorPane pane = load.load();
-                cardController=load.getController();
+                CardController cardController=load.getController();
                 cardController.setData(cardList.get(i));
+                cardController.setMainController(this);
                 if (column == 2) {
                     column = 0;
                     row += 1;
@@ -946,6 +951,7 @@ public ObservableList<Table> tableGetData() throws SQLException {
         staff_col_phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
         staff_col_role.setCellValueFactory(new PropertyValueFactory<>("role"));
         staff_col_pwd.setCellValueFactory(new PropertyValueFactory<>("pwd"));
+        staff_col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         staffTable.setItems(list);
 
     }

@@ -18,6 +18,7 @@ public class DBConnect {
     private String userName = "root";
     private String pwd ="0834023573Dat@@";
     private String url ="jdbc:mysql://localhost:3306/ProjectJavaFX";
+
     private Connection connection;
 
     public DBConnect() throws SQLException {
@@ -44,21 +45,22 @@ public class DBConnect {
         }
     }
 
-    public boolean checkAccount(String email, String password) throws SQLException {
-        String sql = "select * from user where email=? and pwd=?";
+    public boolean checkAccount(String account, String password) throws SQLException {
+        String sql = "select * from user where email=? or phone =? and pwd=?";
         PreparedStatement stm = connection.prepareStatement(sql);
-        stm.setString(1,email);
-        stm.setString(2,password);
+        stm.setString(1,account);
+        stm.setString(2,account);
+        stm.setString(3,password);
         ResultSet rs = stm.executeQuery();
         if (rs.next()) {
             data.id=rs.getInt("id");
             data.userName=rs.getString("name");
             data.role=rs.getString("role");
             System.out.println(rs.getString("name"));
-            System.out.println("Login successful for: " + email);
+            System.out.println("Login successful for: " + account);
             return true;
         } else {
-            System.out.println("Login failed for: " + email);
+            System.out.println("Login failed for: " + account);
             return false;
         }
     }

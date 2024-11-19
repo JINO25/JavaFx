@@ -29,7 +29,7 @@
         </GridPane.margin>
     </Label>
     <!-- Add Email Label -->
-    <Label text="Email ID : " GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+    <Label text="Email or Phone: " GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
     <!-- Add Email Text Field -->
     <TextField fx:id="emailIdField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     <!-- Add Password Label -->

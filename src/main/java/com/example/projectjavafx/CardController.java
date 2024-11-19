@@ -98,7 +98,11 @@ public class CardController implements Initializable {
 
         showAlert(Alert.AlertType.INFORMATION,owner,"Thông báo","Thêm thành công!");
 
-
+        if(mainController != null){
+            mainController.showOrder();
+        }else{
+            System.out.println("Main null");
+        }
     }
 
     @Override

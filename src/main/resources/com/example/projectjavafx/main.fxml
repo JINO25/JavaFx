@@ -455,6 +455,7 @@
                                     <TableColumn fx:id="staff_col_phone" prefWidth="206.0" text="Số điện thoại" />
                                     <TableColumn fx:id="staff_col_role" minWidth="6.0" prefWidth="89.0" text="Vai trò" />
                                     <TableColumn fx:id="staff_col_pwd" prefWidth="134.0" text="Mật khẩu" />
+                                    <TableColumn fx:id="staff_col_status" prefWidth="134.0" text="Trạng thái" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
